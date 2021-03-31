@@ -7,19 +7,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v2
-    - name: Install
-      run: npm install
-    - name: Build
-      run: npm run build
-      env:
-        REPOSITORY: ${{ github.repository }}
-        TOKEN: ${{ secrets.TOKEN }}
-    - name: Update
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "update"
-        git push
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+        env:
+          REPOSITORY: ${{ github.repository }}
+          TOKEN: ${{ secrets.TOKEN }}
+      - name: Update
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "update"
+          git push
