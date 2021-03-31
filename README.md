@@ -12,8 +12,7 @@
 ## 环境配置
 
 ```
-USERNAME=用户名
-REPOS=仓库名
+REPOSITORY=用户名/仓库名
 TOKEN=OAuth授权TOKEN
 ```
 

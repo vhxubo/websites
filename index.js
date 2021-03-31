@@ -10,8 +10,8 @@ if (process.env.TOKEN)
     Authorization: `token ${process.env.TOKEN}`,
   }
 
-if (!process.env.USERNAME || !process.env.REPOS) {
-  console.log('需要配置好USERNAME和REPOS才可以正常使用')
+if (!process.env.REPOSITORY) {
+  console.log('需要配置好REPOSITORY才可以正常使用')
   return
 }
 
@@ -28,14 +28,14 @@ function createItem({ title, body: description }) {
 async function main() {
   // 获取标签
   const { data: labels } = await axios.get(
-    `https://api.github.com/repos/${process.env.USERNAME}/${process.env.REPOS}/labels`
+    `https://api.github.com/repos/${process.env.REPOSITORY}/labels`
   )
 
   // * axios的url记得encode，否则Request path contains unescaped characters
   const promises = labels.map(label =>
     axios.get(
       encodeURI(
-        `https://api.github.com/repos/${process.env.USERNAME}/${process.env.REPOS}/issues?labels=${label.name}`
+        `https://api.github.com/repos/${process.env.REPOSITORY}/issues?labels=${label.name}`
       )
     )
   )
@@ -63,7 +63,8 @@ async function main() {
   }
 
   const obj = {
-    author: process.env.USERNAME,
+    author: process.env.REPOSITORY.split('/')[0],
+    github: `https://github.com/${process.env.REPOSITORY}`,
     updateTime: dayjs().locale('zh-cn').format(),
     list,
   }
