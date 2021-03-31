@@ -17,6 +17,10 @@ REPOS=仓库名
 TOKEN=OAuth授权TOKEN
 ```
 
+### 使用jsdelivr加速
+
+https://cdn.jsdelivr.net/gh/[username]/[repos]/urls.json
+
 ## 其他
 
 - 每个issue设置一个标签，否则会重复出现
