@@ -1,0 +1,17 @@
+{
+  "name": "websites",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
+    "dotenv": "^8.2.0"
+  }
+}
