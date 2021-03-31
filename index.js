@@ -3,11 +3,16 @@ const dayjs = require('dayjs')
 const fs = require('fs')
 const path = require('path')
 
-require('dayjs/locale/zh')
 require('dotenv').config()
 
-axios.defaults.headers = {
-  Authorization: `token ${process.env.TOKEN}`,
+if (process.env.TOKEN)
+  axios.defaults.headers = {
+    Authorization: `token ${process.env.TOKEN}`,
+  }
+
+if (!process.env.USERNAME || !process.env.REPOS) {
+  console.log('需要配置好USERNAME和REPOS才可以正常使用')
+  return
 }
 
 // 数据格式化
