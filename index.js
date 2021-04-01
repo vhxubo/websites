@@ -4,7 +4,10 @@ const fs = require('fs')
 const path = require('path')
 
 require('dotenv').config()
-require('dayjs/locale/zh-cn')
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 if (process.env.TOKEN)
   axios.defaults.headers = {
@@ -63,10 +66,11 @@ async function main() {
     })
   }
 
+  // 在之前就遇到过这种情况，欸，搞成i18n了，应该是时区切换
   const obj = {
     author: process.env.REPOSITORY.split('/')[0],
     github: `https://github.com/${process.env.REPOSITORY}`,
-    updateTime: dayjs().locale('zh-cn').format(),
+    updateTime: dayjs().tz('Asia/ShangHai').format(),
     list,
   }
 
