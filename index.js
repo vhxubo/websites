@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 
 require('dotenv').config()
+require('dayjs/locale/zh-cn')
 
 if (process.env.TOKEN)
   axios.defaults.headers = {
