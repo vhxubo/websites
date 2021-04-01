@@ -18,7 +18,9 @@ TOKEN=OAuth授权TOKEN
 
 ### 使用jsdelivr加速
 
-https://cdn.jsdelivr.net/gh/[username]/[repos]/urls.json
+https://cdn.jsdelivr.net/gh/[username]/[repos]/api/urls.json
+
+GitHub Action运行结束后会输出属于该仓库的cdn连接
 
 ## 其他
 
