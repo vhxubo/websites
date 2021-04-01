@@ -1,18 +1,22 @@
 # websites
 
-- issues标题格式必须遵守`[alt](https://xxxxxx)`
-- issues内容为该标签的描述
+- issues的标题格式必须遵守`[alt](https://xxxxxx)`
+- issues的内容为该网站的描述
+- issues需要为opened
+- issues需要有label
 
 ## 功能
 
 调用GitHub提供的API接口对该库的issues进行整理生成符合格式的json，然后使用cdn进行加速，为后端接口
 
-监听issues动态，使用GitHub Action触发该项目执行
+监听仓库pull,issues[opened, edited, deleted, closed, labeled, unlabeled]动态，使用GitHub Action触发该项目执行
+
+执行顺序：调用接口获取该仓库/指定仓库的所有lable，对每个lable下面的数据进行整理并返回json数据
 
 ## 环境配置
 
-```
-REPOSITORY=用户名/仓库名
+```yml
+REPOSITORY=用户名/仓库名（若不设置则为GitHub Action所在仓库）
 TOKEN=OAuth授权TOKEN
 ```
 
