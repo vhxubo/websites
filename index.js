@@ -71,9 +71,15 @@ async function main() {
 
   console.log(JSON.stringify(obj, null, 2))
 
-  fs.writeFile(path.join(__dirname, 'urls.json'), JSON.stringify(obj), e => {
-    if (e) console.log(e)
-  })
+  if (!fs.existsSync('api')) {
+    fs.mkdirSync('api')
+  }
+
+  fs.writeFileSync(path.join(__dirname, '/api/urls.json'), JSON.stringify(obj))
+
+  console.log(
+    `api url: https://cdn.jsdelivr.net/gh/${process.env.REPOSITORY}/api/urls.json`
+  )
 }
 
 main()
