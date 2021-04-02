@@ -2,7 +2,7 @@ name: Build
 on:
   push:
   issues:
-    types: [opened, edited, deleted, closed, labeled, unlabeled]
+    types: [edited, deleted, closed, labeled, unlabeled]
 
 jobs:
   build:

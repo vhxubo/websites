@@ -5,11 +5,17 @@
 - issues需要为opened
 - issues需要有label
 
+## 操作方法
+
+1. fork本项目
+2. 对[build.yml](.github/workflows/build.yml)进行环境配置
+3. 新建Issue：在按要求填写内容之后，先点击`Submit new issue`，再设置label
+
 ## 功能
 
 调用GitHub提供的API接口对该库的issues进行整理生成符合格式的json，然后使用cdn进行加速，为后端接口
 
-监听仓库pull,issues[opened, edited, deleted, closed, labeled, unlabeled]动态，使用GitHub Action触发该项目执行
+监听仓库pull,issues[edited, deleted, closed, labeled, unlabeled]动态，使用GitHub Action触发该项目执行
 
 执行顺序：调用接口获取该仓库/指定仓库的所有lable，对每个lable下面的数据进行整理并返回json数据
 
