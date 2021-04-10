@@ -42,7 +42,7 @@ function labelSort(list) {
   // [js中sort方法的排序问题及localeCompare方法](https://juejin.cn/post/6844903816597504008)
   const otherList = list
     .filter((item) => !/\d+#/.test(item.name))
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'))
 
   // 拼合数据
   const finalList = seqList.concat(otherList)
