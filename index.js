@@ -29,14 +29,37 @@ function createItem({ title, body: description }) {
   }
 }
 
+// 数据排序
+function labelSort(list) {
+  // 对列表数据按照name正则进行提取并排序
+  const seqList = list
+    .filter((item) => /\d+#/.test(item.name))
+    .sort((a, b) =>
+      Number(a.name.match(/(\d+)#/)[1] - Number(b.name.match(/(\d+)#/)[1]))
+    )
+
+  // 获得不符合正则的项目
+  const otherList = list.filter((item) => !/\d+#/.test(item.name))
+
+  // 处理排序过后的数据，去除多余的文本
+  seqList.forEach((item) => (item.name = item.name.slice(2)))
+
+  // 拼合数据
+  const finalList = seqList.concat(otherList)
+
+  return finalList
+}
+
 async function main() {
   // 获取标签
-  const { data: labels } = await axios.get(
+  let { data: labels } = await axios.get(
     `https://api.github.com/repos/${process.env.REPOSITORY}/labels`
   )
 
+  labels = labelSort(labels)
+
   // * axios的url记得encode，否则Request path contains unescaped characters
-  const promises = labels.map(label =>
+  const promises = labels.map((label) =>
     axios.get(
       encodeURI(
         `https://api.github.com/repos/${process.env.REPOSITORY}/issues?labels=${label.name}`
