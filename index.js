@@ -38,8 +38,11 @@ function labelSort(list) {
       Number(a.name.match(/(\d+)#/)[1] - Number(b.name.match(/(\d+)#/)[1]))
     )
 
-  // 获得不符合正则的项目
-  const otherList = list.filter((item) => !/\d+#/.test(item.name))
+  // 获得不符合正则的项目，按照首字母进行排序
+  // [js中sort方法的排序问题及localeCompare方法](https://juejin.cn/post/6844903816597504008)
+  const otherList = list
+    .filter((item) => !/\d+#/.test(item.name))
+    .sort((a, b) => a.name.localeCompare(b.name))
 
   // 拼合数据
   const finalList = seqList.concat(otherList)
