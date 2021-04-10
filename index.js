@@ -41,9 +41,6 @@ function labelSort(list) {
   // 获得不符合正则的项目
   const otherList = list.filter((item) => !/\d+#/.test(item.name))
 
-  // 处理排序过后的数据，去除多余的文本
-  seqList.forEach((item) => (item.name = item.name.slice(2)))
-
   // 拼合数据
   const finalList = seqList.concat(otherList)
 
@@ -59,11 +56,12 @@ async function main() {
   labels = labelSort(labels)
 
   // * axios的url记得encode，否则Request path contains unescaped characters
+  // #符号对应%23 [url参数中有+、空格、=、%、&、#等特殊符号的处理_Benjamin——前端攻城师-CSDN博客](https://blog.csdn.net/cuew1987/article/details/10952509)
   const promises = labels.map((label) =>
     axios.get(
       encodeURI(
         `https://api.github.com/repos/${process.env.REPOSITORY}/issues?labels=${label.name}`
-      )
+      ).replace('#', '%23')
     )
   )
 
@@ -73,7 +71,7 @@ async function main() {
   for (let i in result) {
     const { data: items } = result[i]
 
-    const label = labels[i]
+    const labelName = labels[i].name.replace(/\d+#/, '')
     if (items.length === 0) {
       continue
     }
@@ -84,7 +82,7 @@ async function main() {
     }
 
     list.push({
-      label: label.name,
+      label: labelName,
       items: newItems,
     })
   }
